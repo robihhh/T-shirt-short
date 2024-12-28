@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Simulate saving order in the database
-    include 'koneksi.php';
+    include 'checkout.php';
     $sql = "INSERT INTO orders (name, email, total) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssd", $name, $email, $total);
