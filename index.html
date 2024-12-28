@@ -1,20 +1,3 @@
-<?php
-// Include database connection
-include 'koneksi.php';
-
-// Fetch products from the database
-$sql = "SELECT * FROM products";
-$result = mysqli_query($conn, $sql);
-
-// Check for query success
-if (!$result) {
-    die('Error fetching products: ' . mysqli_error($conn));
-}
-
-// Close the connection
-mysqli_close($conn);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
