@@ -1,21 +1,30 @@
 <?php
 session_start();
 
-// Check if the cart is empty
+// Cek jika keranjang kosong
 if (empty($_SESSION['cart'])) {
-    echo "<p>Your cart is empty.</p>";
+    echo "<p>Keranjang belanja Anda kosong.</p>";
 } else {
-    echo "<h1>Your Cart</h1><table><tr><th>Product</th><th>Price</th><th>Quantity</th></tr>";
+    echo "<h1>Keranjang Belanja Anda</h1><table><tr><th>Produk</th><th>Harga</th><th>Kuantitas</th><th>Subtotal</th></tr>";
     $total = 0;
+
+    // Looping untuk menampilkan setiap item dalam keranjang
     foreach ($_SESSION['cart'] as $item) {
+        // Menghitung subtotal untuk setiap item
+        $subtotal = $item['price'] * $item['quantity'];
+        $total += $subtotal;  // Menambahkan subtotal ke total keseluruhan
+
+        // Menampilkan data produk
         echo "<tr>
                 <td>{$item['name']}</td>
-                <td>\${$item['price']}</td>
-                <td>1</td> <!-- Assuming one quantity per product for simplicity -->
+                <td>\${number_format($item['price'], 2)}</td>  <!-- Format harga dengan dua desimal -->
+                <td>{$item['quantity']}</td>  <!-- Menampilkan kuantitas produk -->
+                <td>\${number_format($subtotal, 2)}</td>  <!-- Format subtotal dengan dua desimal -->
               </tr>";
-        $total += $item['price'];
     }
-    echo "<tr><td colspan='2'>Total</td><td>\${$total}</td></tr></table>";
-    echo "<a href='checkout.php'>Proceed to Checkout</a>";
+
+    // Menampilkan total akhir
+    echo "<tr><td colspan='3'>Total</td><td>\${number_format($total, 2)}</td></tr></table>";
+    echo "<a href='checkout.php'>Lanjutkan ke Pembayaran</a>";
 }
 ?>
