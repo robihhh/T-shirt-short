@@ -10,7 +10,7 @@ if (!isset($_SESSION['cart'])) {
 $product_id = $_POST['product_id'];
 
 // Simulate fetching product details from the database
-include 'koneksi.php';
+include 'checkout.php';
 $sql = "SELECT * FROM products WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $product_id);
